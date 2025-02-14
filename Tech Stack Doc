@@ -1,0 +1,29 @@
+# Tech Stack Document
+
+## Introduction
+
+Sparq is a mobile-first platform designed to help couples and individuals deepen their emotional, sexual, and communicative connections through advanced AI-driven relationship coaching. The app supports diverse relationship types and also offers premium content such as dynamic meditations and explicit relationship modules. Careful thought has gone into every technology choice to ensure the platform is user-friendly, secure, and scalable, while also meeting high standards for cultural inclusivity and data privacy. This document explains the rationale behind each technology component in clear, everyday language.
+
+## Frontend Technologies
+
+For the user interface, we use Lovable.dev’s cross-platform tools, which streamline mobile app development with a strong focus on simplicity and high performance. These tools work with frameworks like React Native to create rich, engaging experiences on both iOS and Android devices. We have opted for a mobile-first design that emphasizes intuitive navigation and vibrant, culturally inclusive design principles. Additionally, standardized design elements such as familiar typography and color palettes make it easier for users to connect with the app, while the built-in support for native APIs ensures smooth integration with device features like Do Not Disturb and offline functionality.
+
+## Backend Technologies
+
+The backend of Sparq is powered primarily by Supabase, which manages user authentication, encrypted data storage, and secure file management. Supabase provides reliable database services, ensuring that all sensitive information, including user profiles, chat logs, and meditation audio files, are securely stored and managed. Lovable.dev also plays a critical role by helping to facilitate cross-platform development and integrating services seamlessly. In addition to these core systems, OneTrust is used to manage GDPR/CCPA compliance, ensuring that user data privacy is maintained with robust consent management and audit trails. This collaboration among backend technologies creates a solid foundation that supports dynamic AI features and secure interactions.
+
+## Infrastructure and Deployment
+
+Our infrastructure relies on established and well-integrated cloud services that are designed to scale as user demand increases. The combination of Supabase and Lovable.dev supports efficient deployment pipelines and continuous integration/continuous deployment (CI/CD) practices that help to keep the app reliable and up-to-date. Version control systems and automated testing are integral parts of our process to ensure each update is smooth and that feature rollouts are seamless. These choices make it easier to manage deployment across various environments, providing a robust platform that is both scalable for growth and reliable for everyday users.
+
+## Third-Party Integrations
+
+Sparq leverages several third-party services to enhance its functionality and provide users with a comprehensive experience. For advanced natural language processing tasks, the platform integrates the OpenRouter API, which connects to services like DeepSeek-R1 from Anthropic. This helps in detecting relationship conflicts and generating proactive coaching suggestions. Hugging Face plays an important role as well, fine-tuning BERT models for keyword detection and managing moderation efforts. For dynamic meditations, the open-source Tortoise-TTS is used to generate personalized audio sessions. Payment processing is seamlessly integrated with native solutions such as Apple Pay for iOS and Google Play Billing for Android, along with Stripe for any web-based transactions. In addition, analytics tools like Mixpanel, Amplitude, and Firebase Analytics are utilized to monitor engagement, retention, and overall user behavior.
+
+## Security and Performance Considerations
+
+User security and smooth performance have been key drivers in our technology choices. On the security front, all user data is encrypted using strong standards like AES-256 both in transit and at rest. Robust access controls, paired with email/password and social login options, are implemented to ensure that only authorized users can access sensitive information. For sensitive areas like explicit content and date-of-birth verification, additional layers of security are applied for compliance with GDPR and CCPA. From a performance perspective, we have optimized our integrations so that AI interactions occur in a matter of seconds, ensuring a smooth user experience even during periods of high traffic. Caching strategies and fallback mechanisms help maintain service reliability if any external API encounters downtime or rate limits, ensuring that users always have a consistent experience.
+
+## Conclusion and Overall Tech Stack Summary
+
+In summary, Sparq’s technology stack has been carefully selected to balance performance, scalability, and robust security with an engaging user experience. The frontend is designed with Lovable.dev’s powerful cross-platform tools and React Native enhancements so that users have a consistent and intuitive interface, while the backend relies on Supabase paired with OneTrust for secure and compliant data management. Integrated third-party services like OpenRouter, Hugging Face, and Tortoise-TTS enable sophisticated AI-driven features, and secure payment solutions such as Apple Pay, Google Play Billing, and Stripe ensure smooth in-app transactions. This combination of technologies not only meets the unique needs of our diverse user base but also positions Sparq as a reliable, inclusive, and secure platform for deepening connections.
