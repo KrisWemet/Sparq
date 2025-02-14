@@ -1,0 +1,231 @@
+**Implementation Plan for Sparq**
+
+### **Phase 1: Environment Setup**
+
+1.  **Initialize Repository**
+
+    *   Action: Create a new repository on Lovable.dev with branches `main` and `dev`.
+    *   Reference: PRD Section 1, Tech Stack & Tools (Lovable.dev).
+    *   File/Location: Root of the new project.
+    *   **Validation**: Confirm repository structure exists on Lovable.dev.
+
+2.  **Configure Development Environment**
+
+    *   Action: Set up development tools including the Supabase CLI, and install any required packages from Lovable.dev's tools.
+    *   Reference: PRD Section 5, Tech Stack & Tools (Supabase).
+    *   File/Location: Local machine environment configuration files (e.g., `.env`, `config.js`).
+    *   **Validation**: Run `supabase --version` and verify connectivity to Lovable.dev.
+
+3.  **Set Up Code Style and Branch Protection**
+
+    *   Action: Initialize code style configurations and enable branch protection rules on GitHub for `main` branch.
+    *   Reference: PRD Section 1.4.
+    *   File/Location: Repository settings and `README.md` setup instructions.
+    *   **Validation**: Confirm branch protection via GitHub settings.
+
+### **Phase 2: Frontend Development**
+
+1.  **Create Mobile-First Onboarding Screen**
+
+    *   Action: Develop the onboarding screen at route `/onboarding` using Lovable.dev's cross-platform tools.
+    *   Reference: PRD Section 3 (User Flow: Onboarding) & Pages to Build (Onboarding & Authentication).
+    *   File/Location: `/src/screens/Onboarding.js`.
+    *   **Validation**: Run the app and verify the onboarding screen loads with a warm gradient background and relationship type selection.
+
+2.  **Implement Authentication Flow**
+
+    *   Action: Develop authentication components supporting email/password and social logins (Google, Facebook, Apple ID), including DOB verification.
+    *   Reference: PRD Section 3 & Q&A (Authentication methods).
+    *   File/Location: `/src/components/AuthForm.js` and `/src/services/authService.js`.
+    *   **Validation**: Test each authentication method and DOB verification using unit tests (`npm test AuthForm.test.js`).
+
+3.  **Build Dashboard (Home Screen)**
+
+    *   Action: Create the dashboard screen at route `/dashboard` featuring the daily question carousel, Spark Points tracker, and quick-access meditation shortcuts.
+    *   Reference: PRD Section 3 (User Flow: Dashboard) and Pages to Build (Dashboard Screen).
+    *   File/Location: `/src/screens/Dashboard.js`.
+    *   **Validation**: Launch app and check dynamic updates and carousel functionality.
+
+4.  **Develop Profile Setup Screen**
+
+    *   Action: Build the profile setup wizard at route `/profile` with customizable avatars and privacy settings.
+    *   Reference: PRD Section 3 (Profile Setup) and Design Preferences.
+    *   File/Location: `/src/screens/ProfileSetup.js`.
+    *   **Validation**: Verify user inputs are saved and privacy settings are adjustable.
+
+5.  **Implement Activity Pages**
+
+    *   Action: Create individual screens for Question Hub (`/activities/questions`), Conflict Resolution (`/activities/conflict`), and Meditation Library (`/activities/meditations`).
+
+    *   Reference: PRD Section 3 (Activity Pages) and Pages to Build.
+
+    *   File/Location:
+
+        *   `/src/screens/ActivityQuestions.js`
+        *   `/src/screens/ConflictResolution.js`
+        *   `/src/screens/MeditationLibrary.js`
+
+    *   **Validation**: Navigate through each activity page to check for proper routing and feature display.
+
+6.  **Design AI Coaching Interface**
+
+    *   Action: Develop a chat-style interface at route `/coaching` to provide real-time tone analysis and proactive suggestions.
+    *   Reference: PRD Section 3 (AI Coaching Interface) and Core Features: AI Relationship Coaching.
+    *   File/Location: `/src/screens/AICoaching.js`.
+    *   **Validation**: Simulate conversation and verify AI feedback is displayed.
+
+7.  **Create Focus Timer & DND Sync Screen**
+
+    *   Action: Develop a distraction-free focus mode at route `/focus` including a full-screen countdown and integration with native Do Not Disturb via Android WorkManager/iOS BackgroundTasks.
+    *   Reference: PRD Section 3 (Focus Timer & DND Sync) and Mobile Features in Tech Stack.
+    *   File/Location: `/src/screens/FocusTimer.js`.
+    *   **Validation**: Test session start/stop and ensure DND is triggered.
+
+8.  **Build Premium & Referral Pages**
+
+    *   Action: Create screens for premium content and referral rewards at routes `/premium` and `/referral` with clear purchase flows and testimonials.
+
+    *   Reference: PRD Section 3 (Premium & Referral Pages) and Core Features: Content Tiers.
+
+    *   File/Location:
+
+        *   `/src/screens/Premium.js`
+        *   `/src/screens/Referral.js`
+
+    *   **Validation**: Verify pricing, feature unlock options, and referral reward triggers.
+
+9.  **Implement Settings & Data Management Interface**
+
+    *   Action: Develop settings screen at route `/settings` for privacy controls, accessibility toggles (dark mode, font size), and secure data deletion requests.
+    *   Reference: PRD Section 3 (Settings & Data Management).
+    *   File/Location: `/src/screens/Settings.js`.
+    *   **Validation**: Check that settings modifications persist and data deletion flows work correctly.
+
+10. **Develop In-App Purchase Flow Screen**
+
+    *   Action: Create the in-app store page at route `/store` that integrates with native purchase systems and Stripe for web components.
+    *   Reference: PRD Section 3 (In-App Purchases) and Q&A (Payment Processing).
+    *   File/Location: `/src/screens/InAppStore.js`.
+    *   **Validation**: Simulate purchase transactions on iOS (Apple Pay), Android (Google Play Billing) and web (Stripe test mode).
+
+### **Phase 3: Backend Development**
+
+1.  **Integrate Supabase Authentication & Database**
+
+    *   Action: Configure Supabase for user authentication, encrypted data storage, and file management.
+    *   Reference: PRD Section 5 (Tech Stack & Tools) and Backend & Security.
+    *   File/Location: `/backend/config/supabaseConfig.js` and Supabase dashboard.
+    *   **Validation**: Test sign-up, login flows, and data retrieval using Supabase client in development.
+
+2.  **Implement Secure DOB Verification & Data Privacy Measures**
+
+    *   Action: Develop backend endpoints for secure DOB verification and data encryption (AES-256) using trusted third-party services.
+    *   Reference: PRD Section 6 (Non-Functional Requirements) and Q&A (Data Privacy and DOB Verification).
+    *   File/Location: `/backend/routes/verification.js`.
+    *   **Validation**: Unit test DOB verification endpoint and check encrypted storage in the database.
+
+3.  **Set Up AI Integration Endpoints**
+
+    *   Action: Develop API endpoints to integrate with the OpenRouter API for conflict detection and proactive relationship coaching (DeepSeek-R1 and Anthropic).
+    *   Reference: PRD Section 4 (Core Features: AI Relationship Coaching) and Tech Stack (OpenRouter API).
+    *   File/Location: `/backend/routes/aiCoaching.js`.
+    *   **Validation**: Test endpoints using `curl` or Postman to ensure 200 responses and correct NLP processing.
+
+4.  **Integrate Hugging Face for Keyword Detection & Content Moderation**
+
+    *   Action: Build backend logic to fine-tune and integrate Hugging Face BERT models for detecting keywords (e.g., stress, jealousy) and moderate user-generated content.
+    *   Reference: PRD Section 4 (Core Features) and Q&A (Moderation).
+    *   File/Location: `/backend/services/keywordDetection.js`.
+    *   **Validation**: Verify model responses against sample input data.
+
+5.  **Integrate Dynamic Meditations Using Tortoise-TTS**
+
+    *   Action: Implement API endpoints that trigger Tortoise-TTS to generate custom meditation audio sessions based on user input.
+    *   Reference: PRD Section 4 (Dynamic Meditations) and Tech Stack (Tortoise-TTS).
+    *   File/Location: `/backend/routes/meditations.js`.
+    *   **Validation**: Run tests to ensure audio files are generated and stored properly.
+
+6.  **Implement Payment Processing Endpoints**
+
+    *   Action: Develop secure backend endpoints to facilitate in-app purchase flow using native purchase systems and Stripe for web transactions.
+    *   Reference: PRD Section 4 (Content Tiers and In-App Purchases) and Q&A (Payment Processing).
+    *   File/Location: `/backend/routes/payments.js`.
+    *   **Validation**: Test transactions in sandbox mode for Apple Pay, Google Play Billing (if applicable), and Stripe.
+
+### **Phase 4: Integration**
+
+1.  **Connect Frontend to Backend Authentication & Data APIs**
+
+    *   Action: Implement API calls in frontend services (e.g., using Axios or fetch) to interface with Supabase authentication, profile updates, and data management endpoints.
+    *   Reference: PRD Section 3 (User Flow) and Backend Development steps 14-15.
+    *   File/Location: `/src/services/api.js`.
+    *   **Validation**: Perform end-to-end tests for login, signup, and profile update flows.
+
+2.  **Integrate AI Coaching and Meditation Endpoints with Frontend**
+
+    *   Action: Connect frontend components (AI Coaching Interface and Meditation Library) to the backend API endpoints for conflict detection and Tortoise-TTS generated meditations.
+    *   Reference: PRD Section 4 (Core Features: AI Relationship Coaching, Dynamic Meditations).
+    *   File/Location: `/src/services/aiService.js`.
+    *   **Validation**: Simulate usage scenarios to ensure proper AI feedback and audio playback.
+
+3.  **Integrate Native Mobile Features**
+
+    *   Action: Set up native module integrations for Do Not Disturb syncing using Android WorkManager and iOS BackgroundTasks.
+    *   Reference: PRD Section 3 (Focus Timer & DND Sync) and Mobile Features in Tech Stack.
+    *   File/Location: `/src/nativeModules/dndSync.js`.
+    *   **Validation**: Test on both Android and iOS devices for proper DND activation and countdown functionality.
+
+4.  **Link Payment Flow Between Frontend and Backend**
+
+    *   Action: Ensure the in-app purchase screens call the correct payment processing endpoints and trigger native purchase dialogs.
+    *   Reference: PRD Section 4 (Content Tiers and In-App Purchases) and Q&A (Payment Processing).
+    *   File/Location: `/src/services/paymentService.js`.
+    *   **Validation**: Simulate purchase flows and verify that transactions process correctly in test environments.
+
+### **Phase 5: Deployment**
+
+1.  **Deploy Backend to Production (Supabase and Hosting Service)**
+
+    *   Action: Migrate backend services and database schema to production environment on Supabase; update environment variables accordingly.
+    *   Reference: PRD Section 6 (Non-Functional Requirements) and Tech Stack (Supabase).
+    *   File/Location: Deployment scripts under `/infra/deploy/`.
+    *   **Validation**: Run integration tests in production-like environment and monitor response times.
+
+2.  **Build and Deploy Mobile App**
+
+    *   Action: Use Lovable.dev tools to compile and deploy the mobile app to iOS (App Store) and Android (Google Play) with respective native integrations.
+    *   Reference: PRD Section 3 (Mobile-First Development) and Tech Stack (Apple Pay, Google Play Billing).
+    *   File/Location: Build configurations in `/infra/build-config/`.
+    *   **Validation**: Verify app installation and feature functionality on both platforms.
+
+3.  **Set Up Monitoring and Analytics**
+
+    *   Action: Integrate analytics tools (Mixpanel, Amplitude, Firebase Analytics) into the mobile app and backend to track user engagement, performance, and error logging.
+    *   Reference: Q&A (Analytics) and PRD Section 5 (Non-Functional Requirements).
+    *   File/Location: `/src/config/analytics.js`.
+    *   **Validation**: Confirm data is received in dashboard for each tool.
+
+### **Phase 6: Post-Launch**
+
+1.  **Initiate Continuous Testing and User Feedback Collection**
+
+    *   Action: Establish a system for monitoring user feedback, including in-app prompts and integrated analytics reports to collect engagement and retention data.
+    *   Reference: PRD Section 7 (Known Issues & Potential Pitfalls) and Q&A (Analytics).
+    *   File/Location: Internal dashboard under `/infra/monitoring/feedback.js`.
+    *   **Validation**: Review analytics data and user reports for iterative improvements.
+
+2.  **Implement Regular Security Audits and Backups**
+
+    *   Action: Schedule periodic security audits, set up automated backups for Supabase data, and verify audit logs using OneTrust tools.
+    *   Reference: PRD Section 6 (Security & Compliance) and Q&A (Data Privacy).
+    *   File/Location: Backup scripts in `/infra/backup/` and security audit logs maintained in `/logs/security/`.
+    *   **Validation**: Run simulated security tests and check backup integrity.
+
+3.  **Plan and Execute Post-Launch Feature Iterations**
+
+    *   Action: Analyze user data and feedback to schedule improvements in UI, AI accuracy, and in-app purchase options; plan for localization enhancements and potential live therapist integrations after initial launch.
+    *   Reference: PRD Section 8 (Known Issues & Potential Pitfalls) and Steps to Build (Post-Launch Iterations).
+    *   File/Location: Product roadmap documentation updated in `/docs/roadmap.md`.
+    *   **Validation**: Update roadmap and initiate sprint planning sessions based on gathered metrics.
+
+**Final Note:** This implementation plan adheres strictly to the provided Sparq PRD, tech stack specifications, and design guidelines. Each step has been developed as one distinct action referenced by the original documents to ensure clarity and traceability throughout the project lifecycle.
