@@ -1,0 +1,154 @@
+# Project Requirements Document (PRD) – Sparq
+
+## 1. Project Overview
+
+Sparq is a mobile-first platform designed to help couples and individuals deepen their emotional, sexual, and communicative connections using advanced AI-driven relationship coaching. The app is tailored for long-term couples rebuilding intimacy, new couples exploring compatibility, and non-traditional relationships (such as LGBTQ+, polyamorous, and ethically non-monogamous relationships), as well as adults looking for personal growth in their relationships. The platform uses AI to detect conflicts, provide proactive suggestions, and generate personalized meditation sessions, ensuring that users receive both practical and emotional guidance. It also incorporates gamification elements like rewards and badges to encourage ongoing engagement.
+
+The purpose of Sparq is to create a safe, culturally inclusive, and engaging space where users can improve their relationship dynamics and personal growth through tailored activities and guided exercises. By offering freemium content with premium upgrades, seamless integration with native mobile systems, and rigorous data security measures, the key objectives are to drive engagement, enhance user retention, and achieve monetization targets. Success will be measured by user satisfaction, the percentage of daily active users, and monetization metrics such as conversion rates to premium tiers and in-app purchases.
+
+## 2. In-Scope vs. Out-of-Scope
+
+**In-Scope (Version 1):**
+
+*   Mobile-first app development using Lovable.dev’s cross-platform tools.
+*   Onboarding and authentication with email/password and social logins (Google, Facebook, Apple ID) including age/DOB verification for explicit content.
+*   AI Relationship Coaching featuring conflict detection through OpenRouter API (DeepSeek-R1 and Anthropic) and proactive relationship suggestions.
+*   Dynamic Meditations powered by Tortoise-TTS for AI-generated audio sessions.
+*   Focus-Driven Interaction including a distraction-free mode with native Do Not Disturb syncing (WorkManager/iOS BackgroundTasks) and session keyword summaries.
+*   Inclusive Customization allowing relationship profiles and culturally sensitive question pathways.
+*   Gamification with rewards (Spark Points, badges, daily streaks) and a voting system for user-generated content.
+*   Freemium content tiers with basic free content and a premium subscription ($8/month) that unlocks explicit modules.
+*   In-app purchase flow for custom meditations and additional coaching sessions integrated with Apple Pay, Google Play Billing, and Stripe on web components.
+*   Core pages such as Onboarding, Dashboard, Profile Setup, Activity Pages (Questions, Conflict Resolution, Meditations), AI Coaching Interface, Focus Timer, Premium & Referral Pages, Settings & Data Management, and the In-App Store.
+
+**Out-of-Scope:**
+
+*   Live therapist sessions or direct human expert integrations (planned for later phases).
+*   Advanced or experimental AI models beyond those integrated via OpenRouter and Hugging Face.
+*   Complex web app interfaces beyond necessary cross-platform mobile features.
+*   Platforms or features not directly related to relationship coaching and guided meditations.
+*   Large-scale enterprise integrations and internationalization beyond the initially defined languages (English, Spanish, French).
+
+## 3. User Flow
+
+A new user begins their journey at the onboarding screen where they are welcomed with a warm gradient design that instills trust and excitement. At this stage, the user is asked to select their relationship type (monogamous, polyamorous, LGBTQ+, etc.) and complete age verification required for accessing explicit content. After the simple form submission with clear privacy information, the user proceeds to the main dashboard where they encounter a daily question carousel featuring AI-generated summaries, a summary of their shared progress, and notifications about earned Spark Points.
+
+Once on the dashboard, the user can navigate to further sections such as profile setup, activity pages (including the Question Hub, Conflict Resolution exercises, and the Meditation Library), and the AI Coaching Interface. The design encourages easy switching among modules with clear, tactile cues. For moments requiring focus, the user accesses the Focus Timer for a distraction-free session. Finally, users can upgrade to premium tiers or make in-app purchases directly from clearly marked premium or referral pages. Throughout this journey, the interface remains intuitive, guiding the user seamlessly from one interaction to the next.
+
+## 4. Core Features (Bullet Points)
+
+*   **AI Relationship Coaching:**
+
+    *   Integrates OpenRouter API with DeepSeek-R1 and Anthropic for sophisticated NLP tasks.
+    *   Uses conflict detection methods inspired by Gottman’s “Four Horsemen” and offers proactive, tailored suggestions to improve interactions.
+
+*   **Dynamic Meditations:**
+
+    *   Generates customized, AI-driven meditation audio sessions via Tortoise-TTS.
+    *   Provides themed sessions (e.g., teamwork or stress relief) and rewards users for referrals with exclusive meditations.
+
+*   **Focus-Driven Interaction:**
+
+    *   Implements a distraction-free mode synced with native OS Do Not Disturb APIs (Android WorkManager and iOS BackgroundTasks).
+    *   Ends sessions with brief keyword summaries to reinforce key themes.
+
+*   **Inclusive Customization and Gamification:**
+
+    *   Enables users to create detailed relationship profiles catering to various relationship types.
+    *   Features a voting system for user-generated content and rewards via Spark Points and badges.
+
+*   **Content Tiers and In-App Purchases:**
+
+    *   Offers a freemium model with basic free content and a premium tier ($8/month) with explicit modules and advanced tools.
+    *   Integrates seamless in-app purchase systems, utilizing native purchase frameworks and Stripe for web-based experiences.
+
+## 5. Tech Stack & Tools
+
+*   **Frontend & Mobile Framework:**
+
+    *   Primarily built on Lovable.dev’s cross-platform development tools, with support for React Native to access device-specific features.
+    *   User interfaces are designed with a mobile-first approach and culturally inclusive design principles.
+
+*   **Backend & Database:**
+
+    *   Supabase is used for secure user authentication, data storage, and file management.
+    *   Incorporates OneTrust for GDPR/CCPA compliance, privacy management, and audit trails.
+
+*   **AI & Machine Learning:**
+
+    *   OpenRouter API for integrating DeepSeek-R1 and Anthropic for natural language processing tasks.
+    *   Hugging Face will be utilized to fine-tune BERT models for keyword detection and content moderation.
+    *   Tortoise-TTS for dynamic text-to-speech functionalities in meditation sessions.
+
+*   **Payment & In-App Purchases:**
+
+    *   iOS: In-app purchases via Apple Pay and the App Store’s purchase system.
+    *   Android: In-app purchases via Google Play Billing.
+    *   Web (if applicable): Stripe integration to handle subscriptions and secure payments compliant with PCI-DSS.
+
+*   **Analytics & User Tracking:**
+
+    *   Tools such as Mixpanel, Amplitude, and Firebase Analytics to track user engagement, session duration, and interaction flows.
+
+## 6. Non-Functional Requirements
+
+*   **Performance:**
+
+    *   Ensure latency for AI interactions (e.g., coaching and meditation generation) is minimal, targeting sub-2-second response times.
+    *   The mobile app should load in under 3 seconds even on moderate network connections.
+
+*   **Security:**
+
+    *   All user data will be encrypted using AES-256 both in transit and at rest.
+    *   Implement strict access controls, password recovery mechanisms, and two-factor authentication for enhanced security.
+    *   Regular security audits and penetration testing must be conducted.
+
+*   **Compliance:**
+
+    *   GDPR and CCPA compliance through meticulous data management, user consent, and data deletion processes using OneTrust.
+    *   Secure DOB verification and age-check processes without retaining sensitive personal data unnecessarily.
+
+*   **Usability:**
+
+    *   Design with a mobile-first, intuitive, and accessible interface.
+    *   Clear navigation and microinteractions (such as animated progress flames and synchronized breathing animations) to enhance user experience.
+    *   Localization support for at least English, Spanish, and French, with adaptable interfaces for different languages.
+
+## 7. Constraints & Assumptions
+
+*   **Dependencies:**
+
+    *   Rely on Lovable.dev’s development tools for cross-platform implementation.
+    *   Use of native OS APIs for Do Not Disturb syncing (Android WorkManager/iOS BackgroundTasks) assumes these APIs will be stable and accessible.
+    *   Dependence on OpenRouter API, Hugging Face, and Tortoise-TTS means any limitations or changes in these services can affect core functionalities.
+
+*   **Assumptions:**
+
+    *   The targeted initial user load is approximately 1,000 concurrent users, potentially scaling to 10,000 within the first six months.
+    *   The chosen freemium model and in-app purchase integrations on iOS and Android will comply with respective platform policies.
+    *   The diverse user base and culturally inclusive design require ongoing localization and user feedback to refine content and features.
+    *   Existing design preferences are used to develop a fresh UI/UX guide since no existing branding assets are provided.
+
+## 8. Known Issues & Potential Pitfalls
+
+*   **API Rate Limits & Downtime:**
+
+    *   The heavy reliance on external APIs (OpenRouter, Hugging Face, Tortoise-TTS) may encounter rate limits or downtime. Implementing caching strategies and graceful degradation (fallback content) is essential.
+
+*   **Data Privacy Challenges:**
+
+    *   Handling explicit content and DOB verification requires strict adherence to data privacy laws. Meticulous planning for data encryption, access control, and compliance checks is required to avoid legal pitfalls.
+
+*   **Scalability:**
+
+    *   Anticipated spikes in user activity (especially after feature launches) may strain backend resources. Building scalability into Supabase and monitoring traffic closely in the early phases will help mitigate performance issues.
+
+*   **Moderation Accuracy:**
+
+    *   Relying on Hugging Face moderation models may lead to occasional false positives or negatives. Augmenting this with manual oversight and periodic audits of flagged content is advised.
+
+*   **Localization Nuances:**
+
+    *   Supporting multiple languages and culturally sensitive content may introduce translation inaccuracies or UI layout issues. Early testing and iterative improvements based on user feedback will help ensure quality delivery across languages.
+
+This document serves as the central guide for developing Sparq. All subsequent technical documents—detailing front-end guidelines, backend structures, app flows, file structures, and integration rules—will be based on this clear and comprehensive outline.
