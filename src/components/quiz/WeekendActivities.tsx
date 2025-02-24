@@ -24,8 +24,16 @@ export function WeekendActivities({ activities }: WeekendActivitiesProps) {
         <div className="space-y-4">
           {activities.map(activity => (
             <div key={activity.id} className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
-              <p className="text-gray-600 mb-4">{activity.description}</p>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold">{activity.title}</h3>
+                <span className="text-sm text-primary bg-primary/10 px-3 py-1 rounded-full">
+                  {activity.modality}
+                </span>
+              </div>
+              <p className="text-gray-600 mb-2">{activity.description}</p>
+              {activity.explanation && (
+                <p className="text-sm text-gray-500 italic mb-4">{activity.explanation}</p>
+              )}
               <Button className="w-full">Plan This Activity</Button>
             </div>
           ))}
@@ -35,3 +43,4 @@ export function WeekendActivities({ activities }: WeekendActivitiesProps) {
     </div>
   );
 }
+
