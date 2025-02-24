@@ -20,6 +20,41 @@ export interface WeekendActivity {
   explanation?: string;
 }
 
+export interface Journey {
+  id: string;
+  title: string;
+  description: string;
+  type: "communication" | "intimacy" | "personal_growth";
+  created_at: string;
+}
+
+export interface JourneyQuestion {
+  id: string;
+  journey_id: string;
+  text: string;
+  category: string;
+  modality: string;
+  explanation?: string;
+  created_at: string;
+}
+
+export interface UserJourney {
+  id: string;
+  user_id: string;
+  journey_id: string;
+  start_date: string;
+  completed_at?: string;
+}
+
+export interface JourneyResponse {
+  id: string;
+  user_id: string;
+  journey_id: string;
+  question_id: string;
+  answer: string;
+  created_at: string;
+}
+
 export type PsychologyModality = 
   | "Influence & Persuasion"
   | "Positive Psychology"

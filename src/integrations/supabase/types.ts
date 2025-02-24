@@ -9,16 +9,178 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      journey_questions: {
+        Row: {
+          category: string
+          created_at: string | null
+          explanation: string | null
+          id: string
+          journey_id: string | null
+          modality: string
+          text: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          explanation?: string | null
+          id?: string
+          journey_id?: string | null
+          modality: string
+          text: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          explanation?: string | null
+          id?: string
+          journey_id?: string | null
+          modality?: string
+          text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journey_questions_journey_id_fkey"
+            columns: ["journey_id"]
+            isOneToOne: false
+            referencedRelation: "journeys"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      journey_responses: {
+        Row: {
+          answer: string
+          created_at: string | null
+          id: string
+          journey_id: string | null
+          question_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          answer: string
+          created_at?: string | null
+          id?: string
+          journey_id?: string | null
+          question_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          answer?: string
+          created_at?: string | null
+          id?: string
+          journey_id?: string | null
+          question_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journey_responses_journey_id_fkey"
+            columns: ["journey_id"]
+            isOneToOne: false
+            referencedRelation: "journeys"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "journey_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "journey_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      journeys: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          title: string
+          type: Database["public"]["Enums"]["journey_type"]
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          title: string
+          type: Database["public"]["Enums"]["journey_type"]
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          title?: string
+          type?: Database["public"]["Enums"]["journey_type"]
+        }
+        Relationships: []
+      }
+      user_journeys: {
+        Row: {
+          completed_at: string | null
+          id: string
+          journey_id: string | null
+          start_date: string | null
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          id?: string
+          journey_id?: string | null
+          start_date?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          id?: string
+          journey_id?: string | null
+          start_date?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_journeys_journey_id_fkey"
+            columns: ["journey_id"]
+            isOneToOne: false
+            referencedRelation: "journeys"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: {
+          user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      journey_type: "communication" | "intimacy" | "personal_growth"
+      user_role: "user" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
