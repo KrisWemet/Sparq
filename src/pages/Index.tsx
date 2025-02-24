@@ -1,3 +1,4 @@
+
 import { HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActivityCard } from "@/components/activity-card";
@@ -71,7 +72,7 @@ export default function Index() {
           <ActivityCard 
             title="Daily Relationship Quiz" 
             type="quiz"
-            description="Fun questions to learn more about each other. Complete today's quiz to earn points!"
+            description="Mon-Fri: Two relationship questions daily (AM & PM). Weekend Connection Challenge on Sat & Sun. Complete today's quiz to earn points!"
             progress={75}
             actionLabel="Start Quiz"
             onAction={() => navigate("/quiz")}
@@ -146,3 +147,4 @@ export default function Index() {
     </div>
   );
 }
+
