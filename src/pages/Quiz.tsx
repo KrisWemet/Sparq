@@ -9,56 +9,83 @@ interface Question {
   id: number;
   text: string;
   options: string[];
+  category: string;
 }
+
+// Sample categories and questions (you can expand this with actual data)
+const categories = [
+  "Communication",
+  "Quality Time",
+  "Affection",
+  "Support",
+  "Trust",
+  "Values",
+  "Future Goals",
+  "Conflict Resolution",
+  "Independence",
+  "Boundaries",
+  "Family",
+  "Lifestyle",
+  "Intimacy",
+  "Finances",
+  "Shared Activities"
+];
 
 const sampleQuestions: Question[] = [
   {
     id: 1,
-    text: "What is your partner's favorite way to unwind after a long day?",
+    category: "Communication",
+    text: "How do I prefer to discuss important matters?",
     options: [
-      "Reading a book",
-      "Watching TV/movies",
-      "Taking a walk",
-      "Having a quiet conversation"
+      "Face-to-face conversations",
+      "Written messages",
+      "Phone calls",
+      "Taking time to process first"
     ]
   },
   {
     id: 2,
-    text: "How does your partner prefer to receive affection?",
+    category: "Quality Time",
+    text: "What's my ideal way to spend time with my partner?",
     options: [
-      "Physical touch",
-      "Words of affirmation",
-      "Acts of service",
-      "Quality time"
+      "Active outdoor activities",
+      "Quiet time at home",
+      "Going out to events",
+      "Trying new experiences together"
     ]
   },
   {
     id: 3,
-    text: "What's your partner's ideal weekend activity?",
+    category: "Affection",
+    text: "How do I most naturally express affection?",
     options: [
-      "Outdoor adventures",
-      "Relaxing at home",
-      "Social gatherings",
-      "Cultural activities"
+      "Through physical touch",
+      "With words and compliments",
+      "By doing helpful things",
+      "Spending focused time together"
     ]
   }
 ];
 
 export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<{[key: number]: string}>({});
   const [isCompleted, setIsCompleted] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
   const currentQuestion = sampleQuestions[currentQuestionIndex];
   const progress = ((currentQuestionIndex) / sampleQuestions.length) * 100;
 
   const handleAnswer = (answer: string) => {
-    const newAnswers = [...selectedAnswers];
-    newAnswers[currentQuestionIndex] = answer;
+    const newAnswers = { ...selectedAnswers };
+    newAnswers[currentQuestion.id] = answer;
     setSelectedAnswers(newAnswers);
 
     if (currentQuestionIndex < sampleQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      if (sampleQuestions[currentQuestionIndex + 1].category !== currentCategory) {
+        setCurrentCategory(sampleQuestions[currentQuestionIndex + 1].category);
+      }
     } else {
       setIsCompleted(true);
     }
@@ -70,9 +97,12 @@ export default function Quiz() {
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Award className="text-primary w-6 h-6" />
-            <h1 className="text-xl font-semibold text-gray-900">
-              Daily Quiz
-            </h1>
+            <div>
+              <h1 className="text-xl font-semibold text-gray-900">
+                Daily Quiz
+              </h1>
+              <p className="text-sm text-gray-500">{currentCategory}</p>
+            </div>
           </div>
           <div className="text-sm text-gray-500">
             Question {currentQuestionIndex + 1} of {sampleQuestions.length}
@@ -109,9 +139,12 @@ export default function Quiz() {
               Quiz Completed!
             </h2>
             <p className="text-gray-600">
-              Great job! You've earned points for today's quiz.
+              Great job! Your answers have been saved and can be compared with your partner's responses.
             </p>
-            <Button className="w-full" onClick={() => console.log("View results", selectedAnswers)}>
+            <Button 
+              className="w-full" 
+              onClick={() => console.log("View results", selectedAnswers)}
+            >
               View Results
             </Button>
           </div>
