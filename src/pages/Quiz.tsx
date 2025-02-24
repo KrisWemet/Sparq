@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Award, ChevronRight } from "lucide-react";
+import { Award, ChevronRight, Plus } from "lucide-react";
 import { BottomNav } from "@/components/bottom-nav";
+import { Input } from "@/components/ui/input";
 
 interface Question {
   id: number;
@@ -72,14 +73,23 @@ export default function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: number]: string}>({});
   const [isCompleted, setIsCompleted] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const [customAnswer, setCustomAnswer] = useState("");
+  const [showCustomInput, setShowCustomInput] = useState(false);
 
   const currentQuestion = sampleQuestions[currentQuestionIndex];
   const progress = ((currentQuestionIndex) / sampleQuestions.length) * 100;
 
   const handleAnswer = (answer: string) => {
+    if (answer === "other") {
+      setShowCustomInput(true);
+      return;
+    }
+
     const newAnswers = { ...selectedAnswers };
     newAnswers[currentQuestion.id] = answer;
     setSelectedAnswers(newAnswers);
+    setShowCustomInput(false);
+    setCustomAnswer("");
 
     if (currentQuestionIndex < sampleQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -89,6 +99,18 @@ export default function Quiz() {
     } else {
       setIsCompleted(true);
     }
+  };
+
+  const handleCustomAnswer = () => {
+    if (customAnswer.trim()) {
+      handleAnswer(customAnswer.trim());
+    }
+  };
+
+  const handleCategorySelect = (category: string) => {
+    setCurrentCategory(category);
+    // Here you would filter questions by category and set the current question
+    console.log("Selected category:", category);
   };
 
   return (
@@ -128,6 +150,51 @@ export default function Quiz() {
                     {option}
                     <ChevronRight className="w-4 h-4" />
                   </Button>
+                ))}
+                <Button
+                  variant="outline"
+                  className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
+                  onClick={() => handleAnswer("other")}
+                >
+                  Other
+                  <Plus className="w-4 h-4" />
+                </Button>
+
+                {showCustomInput && (
+                  <div className="mt-4 space-y-3">
+                    <Input
+                      placeholder="Enter your answer..."
+                      value={customAnswer}
+                      onChange={(e) => setCustomAnswer(e.target.value)}
+                      className="w-full"
+                    />
+                    <Button 
+                      className="w-full"
+                      onClick={handleCustomAnswer}
+                      disabled={!customAnswer.trim()}
+                    >
+                      Submit Custom Answer
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Category Selection */}
+            <div className="overflow-x-auto pb-4">
+              <div className="flex gap-3">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => handleCategorySelect(category)}
+                    className={`flex-shrink-0 p-4 rounded-lg shadow-sm min-w-[140px] text-center transition-colors ${
+                      category === currentCategory
+                        ? "bg-primary text-white"
+                        : "bg-white text-gray-600 hover:bg-primary/5"
+                    }`}
+                  >
+                    {category}
+                  </button>
                 ))}
               </div>
             </div>
