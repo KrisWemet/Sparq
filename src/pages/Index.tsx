@@ -5,6 +5,24 @@ import { ActivityCard } from "@/components/activity-card";
 import { BottomNav } from "@/components/bottom-nav";
 import { useNavigate } from "react-router-dom";
 
+const categories = [
+  "Communication",
+  "Quality Time",
+  "Affection",
+  "Support",
+  "Trust",
+  "Values",
+  "Future Goals",
+  "Conflict Resolution",
+  "Independence",
+  "Boundaries",
+  "Family",
+  "Lifestyle",
+  "Intimacy",
+  "Finances",
+  "Shared Activities"
+];
+
 export default function Index() {
   const navigate = useNavigate();
 
@@ -30,7 +48,7 @@ export default function Index() {
           <ActivityCard 
             title="Daily Relationship Quiz" 
             type="quiz"
-            description="Fun trivia to discover new things about each other. Complete today's quiz to earn points!"
+            description="Fun questions to learn more about each other. Complete today's quiz to earn points!"
             progress={75}
             actionLabel="Start Quiz"
             onAction={() => navigate("/quiz")}
@@ -61,6 +79,23 @@ export default function Index() {
             actionLabel="View Exercises"
             onAction={() => console.log("Exercises opened")}
           />
+        </section>
+
+        <section className="mt-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Quiz Categories</h2>
+          <div className="overflow-x-auto pb-4">
+            <div className="flex gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => navigate("/quiz")}
+                  className="flex-shrink-0 p-4 rounded-lg shadow-sm min-w-[140px] text-center transition-colors bg-white text-gray-600 hover:bg-primary/5"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
         </section>
       </main>
 

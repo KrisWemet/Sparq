@@ -13,57 +13,38 @@ interface Question {
   category: string;
 }
 
-// Sample categories and questions (you can expand this with actual data)
-const categories = [
-  "Communication",
-  "Quality Time",
-  "Affection",
-  "Support",
-  "Trust",
-  "Values",
-  "Future Goals",
-  "Conflict Resolution",
-  "Independence",
-  "Boundaries",
-  "Family",
-  "Lifestyle",
-  "Intimacy",
-  "Finances",
-  "Shared Activities"
-];
-
 const sampleQuestions: Question[] = [
   {
     id: 1,
     category: "Communication",
-    text: "How do I prefer to discuss important matters?",
+    text: "When something's bothering me, I usually...",
     options: [
-      "Face-to-face conversations",
-      "Written messages",
-      "Phone calls",
-      "Taking time to process first"
+      "Talk it out right away",
+      "Send a thoughtful text",
+      "Call to chat about it",
+      "Need some alone time first"
     ]
   },
   {
     id: 2,
     category: "Quality Time",
-    text: "What's my ideal way to spend time with my partner?",
+    text: "My perfect date night would be...",
     options: [
-      "Active outdoor activities",
-      "Quiet time at home",
-      "Going out to events",
-      "Trying new experiences together"
+      "Getting outdoors and being active together",
+      "Cozy night in with takeout and movies",
+      "Checking out a new restaurant or event",
+      "Trying something we've never done before"
     ]
   },
   {
     id: 3,
     category: "Affection",
-    text: "How do I most naturally express affection?",
+    text: "When I want to show I care, I'm most likely to...",
     options: [
-      "Through physical touch",
-      "With words and compliments",
-      "By doing helpful things",
-      "Spending focused time together"
+      "Give lots of hugs and kisses",
+      "Tell them how special they are",
+      "Do something helpful or thoughtful",
+      "Plan quality time together"
     ]
   }
 ];
@@ -72,7 +53,6 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: number]: string}>({});
   const [isCompleted, setIsCompleted] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [customAnswer, setCustomAnswer] = useState("");
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -93,9 +73,6 @@ export default function Quiz() {
 
     if (currentQuestionIndex < sampleQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      if (sampleQuestions[currentQuestionIndex + 1].category !== currentCategory) {
-        setCurrentCategory(sampleQuestions[currentQuestionIndex + 1].category);
-      }
     } else {
       setIsCompleted(true);
     }
@@ -105,12 +82,6 @@ export default function Quiz() {
     if (customAnswer.trim()) {
       handleAnswer(customAnswer.trim());
     }
-  };
-
-  const handleCategorySelect = (category: string) => {
-    setCurrentCategory(category);
-    // Here you would filter questions by category and set the current question
-    console.log("Selected category:", category);
   };
 
   return (
@@ -123,7 +94,7 @@ export default function Quiz() {
               <h1 className="text-xl font-semibold text-gray-900">
                 Daily Quiz
               </h1>
-              <p className="text-sm text-gray-500">{currentCategory}</p>
+              <p className="text-sm text-gray-500">{currentQuestion.category}</p>
             </div>
           </div>
           <div className="text-sm text-gray-500">
@@ -156,14 +127,14 @@ export default function Quiz() {
                   className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
                   onClick={() => handleAnswer("other")}
                 >
-                  Other
+                  Something else...
                   <Plus className="w-4 h-4" />
                 </Button>
 
                 {showCustomInput && (
                   <div className="mt-4 space-y-3">
                     <Input
-                      placeholder="Enter your answer..."
+                      placeholder="Tell us your answer..."
                       value={customAnswer}
                       onChange={(e) => setCustomAnswer(e.target.value)}
                       className="w-full"
@@ -173,29 +144,10 @@ export default function Quiz() {
                       onClick={handleCustomAnswer}
                       disabled={!customAnswer.trim()}
                     >
-                      Submit Custom Answer
+                      Submit Your Answer
                     </Button>
                   </div>
                 )}
-              </div>
-            </div>
-
-            {/* Category Selection */}
-            <div className="overflow-x-auto pb-4">
-              <div className="flex gap-3">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => handleCategorySelect(category)}
-                    className={`flex-shrink-0 p-4 rounded-lg shadow-sm min-w-[140px] text-center transition-colors ${
-                      category === currentCategory
-                        ? "bg-primary text-white"
-                        : "bg-white text-gray-600 hover:bg-primary/5"
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
               </div>
             </div>
           </div>
@@ -203,16 +155,16 @@ export default function Quiz() {
           <div className="bg-white rounded-2xl p-6 shadow-sm text-center space-y-4">
             <Award className="w-12 h-12 text-primary mx-auto" />
             <h2 className="text-2xl font-semibold text-gray-900">
-              Quiz Completed!
+              All Done!
             </h2>
             <p className="text-gray-600">
-              Great job! Your answers have been saved and can be compared with your partner's responses.
+              Thanks for sharing! We'll compare your answers with your partner's responses.
             </p>
             <Button 
               className="w-full" 
               onClick={() => console.log("View results", selectedAnswers)}
             >
-              View Results
+              See Results
             </Button>
           </div>
         )}
