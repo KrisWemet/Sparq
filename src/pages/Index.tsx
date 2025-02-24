@@ -31,6 +31,12 @@ const categories = [
 
 const actionRoadmap = [
   {
+    title: "Vision & Values Journey",
+    image: "/lovable-uploads/18894602-f224-4cab-8f07-f6701ec2b7f4.png",
+    steps: "4 steps",
+    description: "Define your shared vision and values as a couple"
+  },
+  {
     title: "How to Be a Better Partner",
     image: "/lovable-uploads/18894602-f224-4cab-8f07-f6701ec2b7f4.png",
     steps: "5 steps"
@@ -51,11 +57,6 @@ const actionRoadmap = [
     title: "Building Trust Together",
     image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&h=600",
     steps: "4 steps"
-  },
-  {
-    title: "Communication Skills",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&h=600",
-    steps: "6 steps"
   }
 ];
 
@@ -146,7 +147,7 @@ export default function Index() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Actions Roadmap</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Path to Together</h2>
           <div className="overflow-x-auto -mx-4 px-4 pb-6">
             <div className="flex gap-4">
               {actionRoadmap.map((action) => (
@@ -154,7 +155,7 @@ export default function Index() {
                   key={action.title}
                   title={action.title}
                   imagePath={action.image}
-                  onClick={() => navigate("/roadmap")}
+                  onClick={() => navigate("/journeys")}
                   className="relative"
                 >
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-purple-700">
@@ -171,4 +172,3 @@ export default function Index() {
     </div>
   );
 }
-
