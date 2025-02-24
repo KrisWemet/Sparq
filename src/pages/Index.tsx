@@ -64,6 +64,18 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
+      <div className="sticky top-0 z-50 bg-white border-b">
+        <div className="container max-w-lg mx-auto px-4 py-3 flex items-center">
+          <button 
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <HeartHandshake className="w-8 h-8 text-primary" />
+            <span className="font-semibold text-xl text-primary">Sparq</span>
+          </button>
+        </div>
+      </div>
+
       <main className="container max-w-lg mx-auto px-4 pt-8 animate-slide-up">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -159,3 +171,4 @@ export default function Index() {
     </div>
   );
 }
+
