@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -10,10 +9,11 @@ import { toast } from "sonner";
 interface Question {
   id: number;
   text: string;
-  options: string[];
+  options?: string[];
   category: string;
   timeSlot: "AM" | "PM";
   dayOfWeek: "MON" | "TUE" | "WED" | "THU" | "FRI";
+  intimacyLevel: 1 | 2 | 3 | 4 | 5; // 1 = easiest, 5 = most intimate
 }
 
 interface WeekendActivity {
@@ -24,47 +24,109 @@ interface WeekendActivity {
 }
 
 const weekdayQuestions: Question[] = [
+  // Level 1 - Light & Playful
   {
     id: 1,
-    category: "Communication",
-    text: "When something's bothering me, I usually...",
-    options: [
-      "Talk it out right away",
-      "Send a thoughtful text",
-      "Call to chat about it",
-      "Need some alone time first"
-    ],
+    category: "Physical Connection",
+    text: "What's a tiny touch (like brushing hands) that makes your heart feel lighter?",
     timeSlot: "AM",
-    dayOfWeek: "MON"
+    dayOfWeek: "MON",
+    intimacyLevel: 1
   },
   {
     id: 2,
-    category: "Quality Time",
-    text: "My perfect evening activity would be...",
-    options: [
-      "Getting outdoors and being active together",
-      "Cozy night in with takeout and movies",
-      "Checking out a new restaurant or event",
-      "Trying something we've never done before"
-    ],
+    category: "Communication",
+    text: "What's a silly nickname for a body part that always makes you smile?",
     timeSlot: "PM",
-    dayOfWeek: "MON"
+    dayOfWeek: "MON",
+    intimacyLevel: 1
   },
-  // Add more questions for other days...
+  
+  // Level 2 - Building Trust
+  {
+    id: 3,
+    category: "Emotional Connection",
+    text: "What's a non-sexual touch (like head scratches) that feels like home to you?",
+    timeSlot: "AM",
+    dayOfWeek: "TUE",
+    intimacyLevel: 2
+  },
+  {
+    id: 4,
+    category: "Trust & Vulnerability",
+    text: "What's a time my touch calmed a storm inside you without words?",
+    timeSlot: "PM",
+    dayOfWeek: "TUE",
+    intimacyLevel: 2
+  },
+
+  // Level 3 - Deeper Connection
+  {
+    id: 5,
+    category: "Emotional Intimacy",
+    text: "What's a fear you've overcome to let me see you fully?",
+    timeSlot: "AM",
+    dayOfWeek: "WED",
+    intimacyLevel: 3
+  },
+  {
+    id: 6,
+    category: "Trust & Support",
+    text: "What's a silent promise you've made to protect our intimacy?",
+    timeSlot: "PM",
+    dayOfWeek: "WED",
+    intimacyLevel: 3
+  },
+
+  // Level 4 - Vulnerability
+  {
+    id: 7,
+    category: "Boundaries & Trust",
+    text: "What's a boundary you're scared to set but know you need to?",
+    timeSlot: "AM",
+    dayOfWeek: "THU",
+    intimacyLevel: 4
+  },
+  {
+    id: 8,
+    category: "Physical & Emotional",
+    text: "What's a way I've touched you that rewired your idea of safety?",
+    timeSlot: "PM",
+    dayOfWeek: "THU",
+    intimacyLevel: 4
+  },
+
+  // Level 5 - Deep Intimacy
+  {
+    id: 9,
+    category: "Sacred Connection",
+    text: "What's a part of our physical connection that feels sacred beyond explanation?",
+    timeSlot: "AM",
+    dayOfWeek: "FRI",
+    intimacyLevel: 5
+  },
+  {
+    id: 10,
+    category: "Lasting Bond",
+    text: "What's a piece of forever you've found in the way we fit together?",
+    timeSlot: "PM",
+    dayOfWeek: "FRI",
+    intimacyLevel: 5
+  }
 ];
 
 const weekendActivities: WeekendActivity[] = [
   {
     id: 1,
-    title: "Cozy Weekend In",
-    description: "Based on your answers this week, you both seem to enjoy quality time at home. Why not plan a special movie marathon with your favorite snacks?",
-    category: "Quality Time"
+    title: "Sacred Space Creation",
+    description: "Create a physical space together that feels safe and intimate. Share what elements make it special for each of you.",
+    category: "Physical & Emotional Connection"
   },
   {
     id: 2,
-    title: "Adventure Time",
-    description: "Your answers show you're both in an adventurous mood! Consider trying that new hiking trail you've been talking about.",
-    category: "Activities"
+    title: "Touch Language Exploration",
+    description: "Develop your own private language of touches - create meanings for different gestures that only you two understand.",
+    category: "Physical Connection"
   }
 ];
 
@@ -211,7 +273,7 @@ export default function Quiz() {
                 {currentQuestion.text}
               </h2>
               <div className="space-y-3">
-                {currentQuestion.options.map((option, index) => (
+                {currentQuestion.options?.map((option, index) => (
                   <Button
                     key={index}
                     variant="outline"
