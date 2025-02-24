@@ -2,25 +2,31 @@
 import { HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActivityCard } from "@/components/activity-card";
+import { CategoryCard } from "@/components/category-card";
 import { BottomNav } from "@/components/bottom-nav";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
-  "Communication",
-  "Quality Time",
-  "Affection",
-  "Support",
-  "Trust",
-  "Values",
-  "Future Goals",
-  "Conflict Resolution",
-  "Independence",
-  "Boundaries",
-  "Family",
-  "Lifestyle",
-  "Intimacy",
-  "Finances",
-  "Shared Activities"
+  {
+    title: "Communication",
+    image: "/lovable-uploads/4598ee82-a0b5-40df-8e9d-14bc621abde2.png"
+  },
+  {
+    title: "Quality Time",
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&h=600"
+  },
+  {
+    title: "Trust & Support",
+    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&h=600"
+  },
+  {
+    title: "Future Goals",
+    image: "https://images.unsplash.com/photo-1501286353178-1ec871214838?auto=format&fit=crop&w=800&h=600"
+  },
+  {
+    title: "Shared Activities",
+    image: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=800&h=600"
+  }
 ];
 
 export default function Index() {
@@ -81,18 +87,17 @@ export default function Index() {
           />
         </section>
 
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Quiz Categories</h2>
-          <div className="overflow-x-auto pb-4">
-            <div className="flex gap-3">
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Quiz Categories</h2>
+          <div className="overflow-x-auto -mx-4 px-4 pb-6">
+            <div className="flex gap-4">
               {categories.map((category) => (
-                <button
-                  key={category}
+                <CategoryCard
+                  key={category.title}
+                  title={category.title}
+                  imagePath={category.image}
                   onClick={() => navigate("/quiz")}
-                  className="flex-shrink-0 p-4 rounded-lg shadow-sm min-w-[140px] text-center transition-colors bg-white text-gray-600 hover:bg-primary/5"
-                >
-                  {category}
-                </button>
+                />
               ))}
             </div>
           </div>
