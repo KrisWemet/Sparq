@@ -36,6 +36,18 @@ const actionRoadmap = [
     steps: "5 steps"
   },
   {
+    title: "The Five Love Languages",
+    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&h=600",
+    steps: "5 steps",
+    description: "Discover and explore each other's love languages to deepen your connection"
+  },
+  {
+    title: "36 Questions to Fall in Love",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&h=600",
+    steps: "3 sets",
+    description: "Dr. Arthur Aron's famous questions that can create closeness between two people"
+  },
+  {
     title: "Building Trust Together",
     image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&h=600",
     steps: "4 steps"
@@ -147,4 +159,3 @@ export default function Index() {
     </div>
   );
 }
-
