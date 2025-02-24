@@ -6,13 +6,15 @@ interface CategoryCardProps {
   imagePath: string;
   onClick?: () => void;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export function CategoryCard({
   title,
   imagePath,
   onClick,
-  className
+  className,
+  children
 }: CategoryCardProps) {
   return (
     <button
@@ -30,6 +32,7 @@ export function CategoryCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
+      {children}
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
         <div className="flex items-center">

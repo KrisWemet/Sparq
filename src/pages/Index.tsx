@@ -1,4 +1,3 @@
-
 import { HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActivityCard } from "@/components/activity-card";
@@ -8,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
-    title: "Communication",
-    image: "/lovable-uploads/4598ee82-a0b5-40df-8e9d-14bc621abde2.png"
+    title: "Making Long-Distance Work",
+    image: "/lovable-uploads/c083302d-9da5-416b-a8ac-4e5a4c6285d1.png"
   },
   {
-    title: "Quality Time",
-    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&h=600"
+    title: "Communication",
+    image: "/lovable-uploads/4598ee82-a0b5-40df-8e9d-14bc621abde2.png"
   },
   {
     title: "Trust & Support",
@@ -26,6 +25,24 @@ const categories = [
   {
     title: "Shared Activities",
     image: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=800&h=600"
+  }
+];
+
+const actionRoadmap = [
+  {
+    title: "How to Be a Better Partner",
+    image: "/lovable-uploads/18894602-f224-4cab-8f07-f6701ec2b7f4.png",
+    steps: "5 steps"
+  },
+  {
+    title: "Building Trust Together",
+    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&h=600",
+    steps: "4 steps"
+  },
+  {
+    title: "Communication Skills",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&h=600",
+    steps: "6 steps"
   }
 ];
 
@@ -98,6 +115,27 @@ export default function Index() {
                   imagePath={category.image}
                   onClick={() => navigate("/quiz")}
                 />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Actions Roadmap</h2>
+          <div className="overflow-x-auto -mx-4 px-4 pb-6">
+            <div className="flex gap-4">
+              {actionRoadmap.map((action) => (
+                <CategoryCard
+                  key={action.title}
+                  title={action.title}
+                  imagePath={action.image}
+                  onClick={() => navigate("/roadmap")}
+                  className="relative"
+                >
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-purple-700">
+                    {action.steps}
+                  </div>
+                </CategoryCard>
               ))}
             </div>
           </div>
