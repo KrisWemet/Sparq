@@ -24,28 +24,40 @@ export default function Index() {
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Daily Connection</h2>
           
-          <ActivityCard title="Couple Talk" type="quiz">
-            <p className="text-gray-600 mb-4">
-              Explore how you communicate and understand each other better
-            </p>
-            <Button variant="secondary" className="w-full">Start Quiz</Button>
-          </ActivityCard>
+          <ActivityCard 
+            title="Daily Relationship Quiz" 
+            type="quiz"
+            description="Fun trivia to discover new things about each other. Complete today's quiz to earn points!"
+            progress={75}
+            actionLabel="Start Quiz"
+            onAction={() => console.log("Quiz started")}
+          />
 
-          <ActivityCard title="Dinner Preferences" type="question">
-            <p className="text-gray-600 mb-4">
-              What's your favorite setting for sharing a meal together?
-            </p>
-            <div className="flex justify-end">
-              <Button variant="outline">Answer</Button>
-            </div>
-          </ActivityCard>
+          <ActivityCard 
+            title="Conversation Starter" 
+            type="question"
+            description="What's your idea of a perfect weekend together? Share your thoughts and dreams."
+            onAction={() => console.log("Answer opened")}
+            actionLabel="Share Answer"
+          />
 
-          <ActivityCard title="Staying Connected" type="game">
-            <p className="text-gray-600 mb-4">
-              Fun activities to keep your connection strong
-            </p>
-            <Button variant="outline" className="w-full">Play Now</Button>
-          </ActivityCard>
+          <ActivityCard 
+            title="Love Language Game" 
+            type="game"
+            description="A fun way to learn and practice each other's love languages through interactive challenges."
+            locked
+            actionLabel="Play Game"
+            onAction={() => console.log("Game started")}
+          />
+
+          <ActivityCard 
+            title="Expert Tips & Exercises" 
+            type="quiz"
+            description="Research-based relationship exercises from relationship experts."
+            locked
+            actionLabel="View Exercises"
+            onAction={() => console.log("Exercises opened")}
+          />
         </section>
       </main>
 
