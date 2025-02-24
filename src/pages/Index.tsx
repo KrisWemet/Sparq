@@ -3,8 +3,11 @@ import { HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActivityCard } from "@/components/activity-card";
 import { BottomNav } from "@/components/bottom-nav";
+import { useNavigate } from "react-router-dom";
 
 export default function Index() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       <main className="container max-w-lg mx-auto px-4 pt-8 animate-slide-up">
@@ -30,7 +33,7 @@ export default function Index() {
             description="Fun trivia to discover new things about each other. Complete today's quiz to earn points!"
             progress={75}
             actionLabel="Start Quiz"
-            onAction={() => console.log("Quiz started")}
+            onAction={() => navigate("/quiz")}
           />
 
           <ActivityCard 
