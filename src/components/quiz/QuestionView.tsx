@@ -1,5 +1,5 @@
 
-import { Award, ChevronRight, Plus, Bell } from "lucide-react";
+import { Award, ChevronRight, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Question } from "@/types/quiz";
@@ -22,6 +22,8 @@ export function QuestionView({
   onCustomAnswerChange,
   onNudgePartner
 }: QuestionViewProps) {
+  const isMultipleChoice = currentQuestion.options && currentQuestion.options.length > 0;
+
   return (
     <div className="space-y-6">
       <header className="flex items-center justify-between mb-6">
@@ -49,27 +51,47 @@ export function QuestionView({
           {currentQuestion.text}
         </h2>
         <div className="space-y-3">
-          {currentQuestion.options?.map((option, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
-              onClick={() => onAnswerSubmit(option)}
-            >
-              {option}
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          ))}
-          <Button
-            variant="outline"
-            className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
-            onClick={() => onAnswerSubmit("other")}
-          >
-            Something else...
-            <Plus className="w-4 h-4" />
-          </Button>
+          {isMultipleChoice ? (
+            <>
+              {currentQuestion.options?.map((option, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
+                  onClick={() => onAnswerSubmit(option)}
+                >
+                  {option}
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              ))}
+              <Button
+                variant="outline"
+                className="w-full justify-between text-left font-normal hover:text-primary hover:border-primary"
+                onClick={() => onAnswerSubmit("other")}
+              >
+                Something else...
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </>
+          ) : (
+            <div className="space-y-3">
+              <Input
+                placeholder="Write your answer..."
+                value={customAnswer}
+                onChange={(e) => onCustomAnswerChange(e.target.value)}
+                className="w-full"
+              />
+              <Button 
+                className="w-full"
+                onClick={() => onAnswerSubmit(customAnswer.trim())}
+                disabled={!customAnswer.trim()}
+              >
+                Submit Your Answer
+              </Button>
+            </div>
+          )}
 
-          {showCustomInput && (
+          {isMultipleChoice && showCustomInput && (
             <div className="mt-4 space-y-3">
               <Input
                 placeholder="Tell us your answer..."
