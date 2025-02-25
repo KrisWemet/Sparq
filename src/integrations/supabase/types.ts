@@ -13,27 +13,33 @@ export type Database = {
         Row: {
           category: string
           created_at: string | null
+          difficulty: number | null
           explanation: string | null
           id: string
           journey_id: string | null
+          love_language: string | null
           modality: string
           text: string
         }
         Insert: {
           category: string
           created_at?: string | null
+          difficulty?: number | null
           explanation?: string | null
           id?: string
           journey_id?: string | null
+          love_language?: string | null
           modality: string
           text: string
         }
         Update: {
           category?: string
           created_at?: string | null
+          difficulty?: number | null
           explanation?: string | null
           id?: string
           journey_id?: string | null
+          love_language?: string | null
           modality?: string
           text?: string
         }
@@ -93,21 +99,30 @@ export type Database = {
         Row: {
           created_at: string | null
           description: string
+          difficulty: number | null
+          estimated_duration: unknown | null
           id: string
+          modality: string | null
           title: string
           type: Database["public"]["Enums"]["journey_type"]
         }
         Insert: {
           created_at?: string | null
           description: string
+          difficulty?: number | null
+          estimated_duration?: unknown | null
           id?: string
+          modality?: string | null
           title: string
           type: Database["public"]["Enums"]["journey_type"]
         }
         Update: {
           created_at?: string | null
           description?: string
+          difficulty?: number | null
+          estimated_duration?: unknown | null
           id?: string
+          modality?: string | null
           title?: string
           type?: Database["public"]["Enums"]["journey_type"]
         }
