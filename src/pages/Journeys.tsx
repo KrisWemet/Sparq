@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Journey } from "@/types/quiz";
 import { supabase } from "@/integrations/supabase/client";
 import { BottomNav } from "@/components/bottom-nav";
-import { ChevronLeft, Crown, Unlock, Search, MessageSquare, BookOpen } from "lucide-react";
+import { ChevronLeft, Crown, Unlock, Search, MessageSquare, BookOpen, Star, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -57,11 +57,31 @@ export default function Journeys() {
       </header>
 
       <main className="container max-w-lg mx-auto px-4 pt-8 animate-slide-up">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
             <Crown className="w-8 h-8 text-white" />
           </div>
           <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              {journey?.difficulty && (
+                <div className="flex items-center text-amber-500">
+                  {[...Array(journey.difficulty)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+              )}
+              {journey?.modality && (
+                <span className="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
+                  {journey.modality}
+                </span>
+              )}
+              {journey?.estimated_duration && (
+                <div className="flex items-center gap-1 text-sm text-gray-600">
+                  <Clock className="w-4 h-4" />
+                  <span>{journey.estimated_duration}</span>
+                </div>
+              )}
+            </div>
             <p className="text-lg text-gray-900 leading-relaxed">
               {journey?.description || 
                 "Looking for the secrets to a loving, long-lasting relationship? You're in luck! Over the next 25 days, you'll uncover the secrets to becoming the best partner you can be in order to strengthen your relationship, from proven communication techniques you can practice right now to guaranteed relationship positivity boosters."}
@@ -118,3 +138,4 @@ export default function Journeys() {
     </div>
   );
 }
+
