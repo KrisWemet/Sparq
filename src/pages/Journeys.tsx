@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Journey } from "@/types/quiz";
 import { supabase } from "@/integrations/supabase/client";
 import { BottomNav } from "@/components/bottom-nav";
-import { ChevronLeft, Crown, Unlock, Search, MessageSquareCheck, BookOpen } from "lucide-react";
+import { ChevronLeft, Crown, Unlock, Search, MessageSquare, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -90,7 +90,7 @@ export default function Journeys() {
 
             <div className="bg-primary-100 rounded-2xl p-6">
               <div className="w-12 h-12 rounded-full bg-[#E2E5FF] flex items-center justify-center mb-4">
-                <MessageSquareCheck className="w-6 h-6 text-primary" />
+                <MessageSquare className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Answer</h3>
               <p className="text-gray-600">Answer the questions with your partner</p>
