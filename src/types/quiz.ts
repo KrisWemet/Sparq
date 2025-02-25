@@ -26,6 +26,9 @@ export interface Journey {
   description: string;
   type: "communication" | "intimacy" | "personal_growth";
   created_at: string;
+  difficulty?: number;
+  modality?: string;
+  estimated_duration?: string;
 }
 
 export interface JourneyQuestion {
